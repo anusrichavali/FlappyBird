@@ -15,12 +15,7 @@ function draw(){
   // Code here runs continuously
   background(220);
   
-  noFill()
-  strokeWeight(5)
-  stroke(37, 187, 217)
-  
-  ellipse(50, 50, 50, 50);
-  rect(300, 20, 55, 55);
-  
 
+  // ellipse(50, 50, 50, 50);  
+  
 }
