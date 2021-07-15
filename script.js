@@ -1,21 +1,21 @@
-// Name any p5.js functions we use in `global` so Glitch can recognize them.
-/* global
- *    background, createCanvas, ellipse, noFill, stroke, strokeWeight, rect
- */
+let brushHue
 
-// Content behind double slashes is a comment. Use it for plain English notes,
-// or for code that you want to temporarily disable.
-
-let dvdImage;
-
-function setup(){
-  createCanvas(800, 600);
-  // We only want to load the logo once.
-  dvdImage = loadImage("https://cdn.glitch.com/eaea72a4-ac6d-4777-b76e-f37d75959aa5%2Fdvd.jpeg?1515761833387");
+function setup() {
+  // Canvas & color settings
+  createCanvas(400, 400);
+  colorMode(HSB, 360, 100, 100);
+  brushHue = 0;
+  strokeWeight(6);
+  background(95);
 }
 
-function draw(){
-  background(220);
-  // Draw the logo at the new position.
-  image(dvdImage, 50, 50, 200, 150);
+function draw() {
+ 
+  chooseColors();
+  rect(mouseX, mouseY, 15, 15);
+}
+
+function chooseColors() {
+  stroke(brushHue, 50, 80);
+  fill(brushHue, 50, 80);
 }
