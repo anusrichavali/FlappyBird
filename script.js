@@ -11,19 +11,27 @@ function setup() {
 }
 
 function draw() {
- 
+ chooseColors();
   brushHue += 1;
   if (brushHue > 359){
+    brushHue += 1;
     brushHue = 0;
   } 
   if (mouseIsPressed){
   //rect(mouseX, mouseY, 15, 15);  
     line(pmouseX, pmouseY, mouseX, mouseY);
+    
   }
-  chooseColors();
+  if (keyIsPressed){
+    background(95);
+  }
 }
 
 function chooseColors() {
  stroke(brushHue, 50, 80);
   fill(brushHue, 50, 80);
+}
+
+function mousePressed(){
+  ellipse(random(width), random(height), 30, 30);
 }
