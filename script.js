@@ -32,6 +32,4 @@ function chooseColors() {
   fill(brushHue, 50, 80);
 }
 
-function mousePressed(){
-  ellipse(random(width), random(height), 30, 30);
-}
+ 
