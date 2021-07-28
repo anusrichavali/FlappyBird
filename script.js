@@ -1,4 +1,4 @@
-let brushHue, bird;
+let brushHue, bird, score;
 var pipes = [];
 var lives;
 
@@ -102,6 +102,7 @@ function keyPressed(){
   }
   if (keyCode === ENTER){
     restartGame();
+    pipes.length = 1;
   }
 }
 
@@ -177,8 +178,6 @@ function displayLives() {
    
 function gameOver() {
     strokeWeight(1);
-  textAlign(CENTER);
-  stroke(0);
   fill(0);
   text(`Game Over`, width/2, height/2);
   noLoop();
@@ -186,6 +185,7 @@ function gameOver() {
 
 function restartGame() {
   score = 0;
-  lives = 3;
+  lives = 3; 
   
+  loop();
 }
