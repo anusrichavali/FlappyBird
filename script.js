@@ -3,6 +3,7 @@ var pipes = [];
 function setup() {
   // Canvas & color settings
   createCanvas(400,600);
+  colorMode(HSB, 255, 255);
   bird = new Bird();
   pipes.push(new Pipe());
 }
@@ -19,9 +20,15 @@ function draw() {
   for (let i = pipes.length - 1; i >= 0; i--){
     pipes[i].display();
     pipes[i].update();
+    
+      if (pipes[i].hit(bird)){
+        bird.hue = 0;   
+      }
+    
       if (pipes[i].offscreen()){
       pipes.splice(i, 1);
-    }
+       }
+    
   }
   
   
@@ -30,13 +37,15 @@ function draw() {
 function Bird() {
   this.x = width/2;
   this.y = height/2;
+  this.hue = 55;
   
   this.gravity = 0.1;
   this.lift = -3;
   this.velocity = 0;
   
+  
   this.show = function () {
-    fill(255);
+    fill(this.hue, 100, 100);
     circle(this.x, this.y, 16);
   }
   
@@ -95,5 +104,14 @@ class Pipe {
     } else {
       return false; 
     }
+  }
+  
+  hit() {
+    if (bird.y < this.top || bird.y > height - this.bottom){
+      if (bird.x > this.x && bird.x < this.x + this.w){
+        return true;
+      }
+    }
+    return false;   
   }
 }
