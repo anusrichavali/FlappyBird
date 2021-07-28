@@ -12,13 +12,16 @@ function draw() {
   bird.show();
   bird.update();
   
-  if (frameCount % 40 == 0){
-    
+  if (frameCount % 100 == 0){
+    pipes.push(new Pipe());
   }
   
-  for (let i = 0; i < pipes.length; i++){
+  for (let i = pipes.length - 1; i >= 0; i--){
     pipes[i].display();
     pipes[i].update();
+      if (pipes[i].offscreen()){
+      pipes.splice(i, 1);
+    }
   }
   
   
@@ -58,11 +61,14 @@ function Bird() {
   }
 }
 
-function keyPressed(){
-  if (keyCode === UP_ARROW){
+function keyPressed(){         
+  if (keyCode === 32){
     bird.up();
   }
 }
+
+
+
  
 class Pipe {
   constructor(){
@@ -70,7 +76,7 @@ class Pipe {
     this.bottom = random(height/2);
     this.x = width;
     this.w = 20;
-    this.speed = 1;
+    this.speed = 2;
   }
   
   display(){
@@ -81,5 +87,13 @@ class Pipe {
   
   update() {
     this.x -= this.speed;
+  }
+  
+  offscreen() {
+    if (this.x < -this.w){
+      return true;
+    } else {
+      return false; 
+    }
   }
 }
