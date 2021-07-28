@@ -1,15 +1,27 @@
 let brushHue, bird;
-
+var pipes = [];
 function setup() {
   // Canvas & color settings
   createCanvas(400,600);
   bird = new Bird();
+  pipes.push(new Pipe());
 }
 
 function draw() {
   background(0);
   bird.show();
   bird.update();
+  
+  if (frameCount % 40 == 0){
+    
+  }
+  
+  for (let i = 0; i < pipes.length; i++){
+    pipes[i].display();
+    pipes[i].update();
+  }
+  
+  
 }
 
 function Bird() {
@@ -17,8 +29,8 @@ function Bird() {
   this.y = height/2;
   
   this.gravity = 0.1;
-  this.lift = -5;
-  this.velocity = 0.6;
+  this.lift = -3;
+  this.velocity = 0;
   
   this.show = function () {
     fill(255);
@@ -52,3 +64,22 @@ function keyPressed(){
   }
 }
  
+class Pipe {
+  constructor(){
+  this.top = random(height/2);
+    this.bottom = random(height/2);
+    this.x = width;
+    this.w = 20;
+    this.speed = 1;
+  }
+  
+  display(){
+    fill(255);
+    rect(this.x, 0, this.w, this.top);
+    rect(this.x, height - this.bottom, this.w, this.bottom);
+  }
+  
+  update() {
+    this.x -= this.speed;
+  }
+}
