@@ -9,12 +9,14 @@ function preload(){
   colorMode(HSB, 255, 255);
   bird = new Bird();
   pipes.push(new Pipe());
+  score = 0;
 }
 
 function draw() {
   background(img);
   bird.show();
   bird.update();
+  displayScore();        
   
   if (frameCount % 100 == 0){
     pipes.push(new Pipe());
@@ -24,10 +26,14 @@ function draw() {
     pipes[i].display();
     pipes[i].update();
     
-      if (pipes[i].hit(bird)){
-        pipes[i].hue = 0;  
+       if (pipes[i].miss(bird)){
+        score += 1;
       }
     
+      if (pipes[i].hit(bird)){
+        pipes[i].hue = 0;  
+      } 
+     
       if (pipes[i].offscreen()){
       pipes.splice(i, 1);
        }
@@ -121,8 +127,23 @@ class Pipe {
       if (bird.x > this.x && bird.x < this.x + this.w){
         return true;
       }
+    } else {
+      return false;          
     }
-    return false;   
+  
+  }
+  miss() {
+    if (bird.y > this.top || bird.y < height - this.bottom){
+      if (bird.x < this.x && bird.x > this.x + this.w){
+      return true;
+      }
+    }
+    return false;
   }
 }
 
+function displayScore() {
+  fill(0);
+  strokeWeight(1);
+  text (`Score: ${score}`, 40, 20);    
+}
