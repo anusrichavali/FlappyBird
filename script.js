@@ -1,35 +1,39 @@
-let brushHue
+let brushHue, bird;
 
 function setup() {
   // Canvas & color settings
-  createCanvas(400, 400);
-  colorMode(HSB, 360, 100, 100);
-  brushHue = 0;
-  strokeWeight(6);
-  background(95);
-  
+  createCanvas(400,600);
+  bird = new Bird();
 }
 
 function draw() {
- chooseColors();
-  brushHue += 1;
-  if (brushHue > 359){
-    brushHue += 1;
-    brushHue = 0;
-  } 
-  if (mouseIsPressed){
-  //rect(mouseX, mouseY, 15, 15);  
-    line(pmouseX, pmouseY, mouseX, mouseY);
+  background(0);
+  bird.show();
+  bird.update();
+}
+
+function Bird() {
+  this.x = width/2;
+  this.y = height/2;
+  
+  this.gravity = 1;
+  this.velocity = 0;
+  
+  this.show = function () {
+    fill(255);
+    circle(this.x, this.y, 16);
+  }
+  
+  this.update = function () {
+    // makes the bird drop down
+    this.velocity += this.gravity;
+    this.y += this.velocity;
     
-  }
-  if (keyIsPressed){
-    background(95);
+    //need to make the bird stop dropping at the bottom of the window
+    if (this.y > height){
+      this.y = height;
+      this.velocity = 0;
+    }
   }
 }
-
-function chooseColors() {
- stroke(brushHue, 50, 80);
-  fill(brushHue, 50, 80);
-}
-
  
