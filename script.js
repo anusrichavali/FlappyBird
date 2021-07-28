@@ -1,10 +1,9 @@
 let brushHue, bird;
 var pipes = [];
 function preload(){
-  img = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Fclouds.jpeg?v=1627503620241");
+  img = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Fsky2.jpeg?v=1627504010156");
 }
-
-function setup() {
+  function setup() {
   // Canvas & color settings
   createCanvas(400,600);
   colorMode(HSB, 255, 255);
@@ -51,6 +50,10 @@ function Bird() {
   this.show = function () {
     fill(this.hue, 100, 100);
     circle(this.x, this.y, 16);
+    
+    fill(this.hue, 0, 0);  
+    circle(this.x + 3, this.y, 2);
+
   }
   
   this.update = function () {
@@ -91,7 +94,7 @@ class Pipe {
     this.w = 20;
     this.speed = 2;
     this.hue = 228;
-    this.sat = 20;
+    this.sat = 60;
     this.brightness = 100;
   }
   
@@ -122,3 +125,4 @@ class Pipe {
     return false;   
   }
 }
+
