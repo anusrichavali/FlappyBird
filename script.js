@@ -1,5 +1,6 @@
 let brushHue, bird;
 var pipes = [];
+
 function preload(){
   img = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Fsky2.jpeg?v=1627504010156");
 }
@@ -10,6 +11,7 @@ function preload(){
   bird = new Bird();
   pipes.push(new Pipe());
   score = 0;
+  lives = 3;
 }
 
 function draw() {
@@ -26,13 +28,12 @@ function draw() {
     pipes[i].display();
     pipes[i].update();
     
-       if (pipes[i].miss(bird)){
-        score += 1;
-      }
-    
       if (pipes[i].hit(bird)){
         pipes[i].hue = 0;  
-      } 
+      } else if (pipes[i].miss(bird)){
+        score += 0.1;
+        
+      }
      
       if (pipes[i].offscreen()){
       pipes.splice(i, 1);
@@ -133,9 +134,9 @@ class Pipe {
   
   }
   miss() {
-    if (bird.y > this.top || bird.y < height - this.bottom){
-      if (bird.x < this.x && bird.x > this.x + this.w){
-      return true;
+    if (bird.y > this.top && bird.y < height - this.bottom){
+      if (bird.x > this.x && bird.x < this.x + this.w){
+        return true;
       }
     }
     return false;
@@ -145,5 +146,9 @@ class Pipe {
 function displayScore() {
   fill(0);
   strokeWeight(1);
-  text (`Score: ${score}`, 40, 20);    
+  text (`Score: ${round(score)}`, 20, 20);    
+}
+
+function displayLives() {
+  
 }
