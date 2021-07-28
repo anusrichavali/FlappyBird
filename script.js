@@ -1,5 +1,9 @@
 let brushHue, bird;
 var pipes = [];
+function preload(){
+  img = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Fclouds.jpeg?v=1627503620241");
+}
+
 function setup() {
   // Canvas & color settings
   createCanvas(400,600);
@@ -9,7 +13,7 @@ function setup() {
 }
 
 function draw() {
-  background(0);
+  background(img);
   bird.show();
   bird.update();
   
@@ -22,7 +26,7 @@ function draw() {
     pipes[i].update();
     
       if (pipes[i].hit(bird)){
-        bird.hue = 0;   
+        pipes[i].hue = 0;  
       }
     
       if (pipes[i].offscreen()){
@@ -86,10 +90,13 @@ class Pipe {
     this.x = width;
     this.w = 20;
     this.speed = 2;
+    this.hue = 228;
+    this.sat = 20;
+    this.brightness = 100;
   }
   
   display(){
-    fill(255);
+    fill(this.hue, this.sat, this.brightness );
     rect(this.x, 0, this.w, this.top);
     rect(this.x, height - this.bottom, this.w, this.bottom);
   }
