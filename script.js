@@ -111,8 +111,8 @@ function keyPressed(){
  
 class Pipe {
   constructor(){
-  this.top = random(height/2);
-    this.bottom = random(height/2);
+    this.top = random(0, 290);
+    this.bottom = random(310, 600);
     this.x = width;
     this.w = 20;
     this.speed = 2;
@@ -124,7 +124,7 @@ class Pipe {
   display(){
     fill(this.hue, this.sat, this.brightness );
     rect(this.x, 0, this.w, this.top);
-    rect(this.x, height - this.bottom, this.w, this.bottom);
+    rect(this.x, this.bottom, this.w, this.bottom);
   }
   
   update() {
@@ -140,7 +140,7 @@ class Pipe {
   }
   
   hit() {
-    if (bird.y < this.top || bird.y > height - this.bottom){
+    if (bird.y < this.top || bird.y > this.bottom){
       if (bird.x > this.x && bird.x < this.x + this.w){
         return true;
       }
@@ -150,7 +150,7 @@ class Pipe {
   
   }
   miss() {
-    if (bird.y > this.top && bird.y < height - this.bottom){
+    if (bird.y > this.top && bird.y <   this.bottom){
       if (bird.x > this.x && bird.x < this.x + this.w){
         return true;
       }
@@ -186,6 +186,7 @@ function gameOver() {
 function restartGame() {
   score = 0;
   lives = 3; 
-  
+  bird.x = width/2;
+  bird.y = height/2;
   loop();
 }
