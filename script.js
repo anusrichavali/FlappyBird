@@ -27,6 +27,10 @@ function draw() {
   displayScore();    
   displayLives();
   
+  if (score > 5){
+    //bird.expand();    
+  }
+  
   if (lives <= 0){
     gameOver();            
   }
@@ -60,6 +64,7 @@ function Bird() {
   this.x = width/2;
   this.y = height/2;
   this.hue = 55;
+  this.w = 16;
   
   this.gravity = 0.1;
   this.lift = -3;
@@ -68,7 +73,7 @@ function Bird() {
   
   this.show = function () {
     fill(this.hue, 100, 100);
-    circle(this.x, this.y, 16);
+    circle(this.x, this.y, this.w);
     
     fill(this.hue, 0, 0);  
     circle(this.x + 3, this.y, 2);
@@ -111,8 +116,8 @@ function keyPressed(){
  
 class Pipe {
   constructor(){
-    this.top = random(0, 290);
-    this.bottom = random(310, 600);
+    this.top = random(180, 290);
+    this.bottom = random(305, 420);
     this.x = width;
     this.w = 20;
     this.speed = 2;
