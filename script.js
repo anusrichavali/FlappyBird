@@ -16,8 +16,9 @@ function Bird() {
   this.x = width/2;
   this.y = height/2;
   
-  this.gravity = 1;
-  this.velocity = 0;
+  this.gravity = 0.1;
+  this.lift = -5;
+  this.velocity = 0.6;
   
   this.show = function () {
     fill(255);
@@ -33,7 +34,21 @@ function Bird() {
     if (this.y > height){
       this.y = height;
       this.velocity = 0;
+    } else if (this.y < 0) {
+      this.y = 0;
+      this.velocity = 0;
     }
+  }
+  
+  this.up = function() {
+    this.velocity += this.lift;
+    this.y += this.velocity;
+  }
+}
+
+function keyPressed(){
+  if (keyCode === UP_ARROW){
+    bird.up();
   }
 }
  
