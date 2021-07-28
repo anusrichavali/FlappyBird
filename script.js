@@ -3,6 +3,7 @@ var pipes = [];
 
 function preload(){
   img = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Fsky2.jpeg?v=1627504010156");
+  life = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Ff0da2add-ad1f-4f40-a83a-8d71fcb6b401.image.png?v=1627506099309");
 }
   function setup() {
   // Canvas & color settings
@@ -11,14 +12,16 @@ function preload(){
   bird = new Bird();
   pipes.push(new Pipe());
   score = 0;
-  lives = 3;
+
+  
 }
 
 function draw() {
   background(img);
   bird.show();
   bird.update();
-  displayScore();        
+  displayScore();    
+  displayLives();
   
   if (frameCount % 100 == 0){
     pipes.push(new Pipe());
@@ -150,5 +153,7 @@ function displayScore() {
 }
 
 function displayLives() {
-  
+  image(life, 20, 30, 20, 20);
+  image(life, 40, 30, 20, 20);
+  image(life, 60, 30, 20, 20);
 }
