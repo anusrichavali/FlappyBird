@@ -18,7 +18,7 @@ life3 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2
   pipes.push(new Pipe());
   score = 0;
   lives = 3;
-  food.push(new Food())
+  food.push(new Food());
 }
 
 function draw() {
@@ -35,7 +35,9 @@ function draw() {
   
   if (frameCount % 70 == 0){
     pipes.push(new Pipe());
-  } else if
+  } else if (frameCount % 250 == 0){
+    food.push(new Food());
+  }
   
   for (let i = pipes.length - 1; i >= 0; i--){
     pipes[i].display();
@@ -53,6 +55,13 @@ function draw() {
       pipes.splice(i, 1);
        }
     
+  }
+  for (let i = food.length - 1; i>=0; i--){
+    food[i].show(); 
+    
+    if (food[i].offscreen()){
+      food.splice(i, 1);         
+    }
   }
   
   
@@ -174,6 +183,14 @@ class Food {
   show(){
     fill(this.color, this.sat, this.bri);
     circle(this.x, this.y, this.w);
+  }
+  
+  offscreen() {
+    if (this.x < bird.x){
+      return true;
+    } else {
+      return false; 
+    }
   }
   
   hit() {
