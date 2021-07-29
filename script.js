@@ -1,6 +1,7 @@
 let brushHue, bird, score;
 var pipes = [];
 var lives;
+var food = [];
 
 function preload(){
   img = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Fsky2.jpeg?v=1627504010156");
@@ -17,7 +18,7 @@ life3 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2
   pipes.push(new Pipe());
   score = 0;
   lives = 3;
-  
+  food.push(new Food())
 }
 
 function draw() {
@@ -27,17 +28,14 @@ function draw() {
   displayScore();    
   displayLives();
   
-  if (score > 5){
-    //bird.expand();    
-  }
-  
+ 
   if (lives <= 0){
     gameOver();            
   }
   
   if (frameCount % 70 == 0){
     pipes.push(new Pipe());
-  }
+  } else if
   
   for (let i = pipes.length - 1; i >= 0; i--){
     pipes[i].display();
@@ -114,7 +112,7 @@ function keyPressed(){
  
 class Pipe {
   constructor(){
-    this.top = random(180, 290);
+    this.top = random(240, 290);
     this.bottom = random(305, 420);
     this.x = width;
     this.w = 20;
@@ -172,9 +170,18 @@ class Food {
     this.sat = 80;
     this.bri = 80;
   }
+  
   show(){
     fill(this.color, this.sat, this.bri);
     circle(this.x, this.y, this.w);
+  }
+  
+  hit() {
+    if (collideCircleCircle(bird.x, bird.y, bird.w, this.x, this.y, this.w)){
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
