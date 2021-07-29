@@ -25,7 +25,7 @@ function draw() {
   background(img);
   bird.show();
   bird.update();
-  displayScore();    
+  displayScore();  
   displayLives();
   
 
@@ -33,6 +33,15 @@ function draw() {
  
   if (lives <= 0){
     gameOver();            
+  }
+  if (lifeThree() === true){
+    image(life3, 60, 30, 20, 20);  
+  } 
+  if (lifeTwo() === true){
+    image(life2, 40, 30, 20, 20);
+  } 
+  if (lifeOne() === true){
+    image(life1, 20, 30, 20, 20);
   }
   
   if (score <= 5){
@@ -140,7 +149,7 @@ class Pipe {
   }
   
   display(){
-    fill(this.hue, this.sat, this.brightness );
+    fill(this.hue, this.sat, this.brightness);
     rect(this.x, 0, this.w, this.top);
     rect(this.x, this.bottom, this.w, height - this.bottom);
   }
@@ -187,15 +196,36 @@ function displayScore() {
   text (`Score: ${round(score)}`, 20, 20);    
 }
 
-function displayLives() {
-  image(life1, 20, 30, 20, 20);
-  image(life2, 40, 30, 20, 20);
-  image(life3, 60, 30, 20, 20);
+function lifeOne() {
   
-  
+  if(lives >= 1){
+    return true;
+  } else if (lives < 1){
+    return false;
+  }
+}
+
+function lifeTwo() {
+ if (lives >= 2){
+   return true;
+ } else if (lives < 2){
+   return false;
+ }
+}
+
+function lifeThree() {
+ if (lives >= 3){
+   return true;
+ } else if (lives < 3){
+   return false;
+ }
+}
+
+function displayLives(){
   fill(0);
   strokeWeight(1);
   text (`Lives: ${round(lives)}`, 20, 60);  
+  
 }
 
 
