@@ -28,6 +28,8 @@ function draw() {
   displayScore();    
   displayLives();
   
+
+  
  
   if (lives <= 0){
     gameOver();            
@@ -162,6 +164,22 @@ class Pipe {
 }
 
 
+class Apple {
+  constructor() {
+    this.size = 10;
+    this.x = random(30, width-30);
+    this.y = random(30, height-30);
+  }
+
+  showSelf() {
+    stroke(0, 80, 80);
+    fill(0, 80, 80);
+    rect(this.x, this.y, this.size, this.size);
+  }
+}
+
+
+
 
 function displayScore() {
   fill(0);
@@ -201,6 +219,3 @@ function handleTime(){
   }
 }
 
-function foodTime(){
-  if()
-}
