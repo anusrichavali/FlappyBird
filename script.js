@@ -1,12 +1,12 @@
-let brushHue, bird, score;
+let brushHue, bird, score, img, life1, life2, life3;
 var pipes = [];
 var lives;
 
 function preload(){
-  img = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Fsky2.jpeg?v=1627504010156");
-  life1 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Ff0da2add-ad1f-4f40-a83a-8d71fcb6b401.image.png?v=1627506099309");
-life2 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Ff0da2add-ad1f-4f40-a83a-8d71fcb6b401.image.png?v=1627506099309");
-life3 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Ff0da2add-ad1f-4f40-a83a-8d71fcb6b401.image.png?v=1627506099309");
+       img = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Fsky2.jpeg?v=1627504010156");
+ life1 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Ff0da2add-ad1f-4f40-a83a-8d71fcb6b401.image.png?v=1627506099309");
+ life2 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Ff0da2add-ad1f-4f40-a83a-8d71fcb6b401.image.png?v=1627506099309");
+ life3 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Ff0da2add-ad1f-4f40-a83a-8d71fcb6b401.image.png?v=1627506099309");
 
 }
   function setup() {
@@ -18,6 +18,7 @@ life3 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2
   score = 0;
   lives = 3;
 
+    
 }
 
 function draw() {
@@ -38,9 +39,11 @@ function draw() {
     Pipe.top = random(280, 290);
     Pipe.bottom = random(300, 340);
   } else if (score > 5){
+    bird.w = 20;
     Pipe.top = random(270,280);
     Pipe.bottom = random(290,310);
-   
+  } else if (score > 15){
+    bird.w = 25;
   }
     
   
@@ -48,6 +51,7 @@ function draw() {
     pipes.push(new Pipe());
   } 
        
+  
   for (let i = pipes.length - 1; i >= 0; i--){
     pipes[i].display();
     pipes[i].update();
@@ -138,7 +142,7 @@ class Pipe {
   display(){
     fill(this.hue, this.sat, this.brightness );
     rect(this.x, 0, this.w, this.top);
-    rect(this.x, this.bottom, this.w, this.bottom);
+    rect(this.x, this.bottom, this.w, height - this.bottom);
   }
   
   update() {
@@ -189,10 +193,12 @@ function displayLives() {
   image(life3, 60, 30, 20, 20);
   
   
-    fill(0);
+  fill(0);
   strokeWeight(1);
   text (`Lives: ${round(lives)}`, 20, 60);  
 }
+
+
    
 function gameOver() {
     strokeWeight(1);
@@ -209,9 +215,4 @@ function restartGame() {
   loop();
 }
 
-function handleTime(){
-  if (time < 10000000000000){
-    time += 1;
-  }
-}
 
