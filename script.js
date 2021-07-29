@@ -97,6 +97,7 @@ function Bird() {
   
   
   this.show = function () {
+    stroke(0);
     fill(this.hue, 100, 100);
     circle(this.x, this.y, this.w);
     
@@ -150,6 +151,7 @@ class Pipe {
   }
   
   display(){
+    stroke(this.hue, this.sat, this.brightness);
     fill(this.hue, this.sat, this.brightness);
     rect(this.x, 0, this.w, this.top);
     rect(this.x, this.bottom, this.w,this.bottom);
@@ -193,6 +195,7 @@ class Pipe {
 
 function displayScore() {
   fill(0);
+  stroke(0);   
   strokeWeight(1);
   text (`Score: ${round(score)}`, 20, 20);    
 }
@@ -224,6 +227,7 @@ function lifeThree() {
 
 function displayLives(){
   fill(0);
+  stroke(0);
   strokeWeight(1);
   text (`Lives: ${round(lives)}`, 20, 60);  
   
@@ -233,6 +237,7 @@ function displayLives(){
    
 function gameOver() {
     strokeWeight(1);
+  stroke(0);
   fill(0);
   text(`Game Over at ${round(score)}`, 160, height/2);
   noLoop();
