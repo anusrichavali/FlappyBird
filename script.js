@@ -35,11 +35,12 @@ function draw() {
   }
   
   if (score <= 5){
-    pipe.top = random(240, 290);
-    pipe.bottom = random(305, 420);
-  } else if (score > 10){
-    pipe.top = random(260, 290);
-    pipe.bottom = random(305, 420);
+    Pipe.top = random(280, 290);
+    Pipe.bottom = random(300, 340);
+  } else if (score > 5){
+    Pipe.top = random(270,280);
+    Pipe.bottom = random(290,310);
+   
   }
     
   
