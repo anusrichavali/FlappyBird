@@ -17,8 +17,7 @@ life3 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2
   pipes.push(new Pipe());
   score = 0;
   lives = 3;
-  foodTime = 75;
-  time = 0;
+
 }
 
 function draw() {
@@ -35,10 +34,19 @@ function draw() {
     gameOver();            
   }
   
+  if (score <= 5){
+    pipe.top = random(240, 290);
+    pipe.bottom = random(305, 420);
+  } else if (score > 10){
+    pipe.top = random(260, 290);
+    pipe.bottom = random(305, 420);
+  }
+    
+  
   if (frameCount % 70 == 0){
     pipes.push(new Pipe());
   } 
-  
+       
   for (let i = pipes.length - 1; i >= 0; i--){
     pipes[i].display();
     pipes[i].update();
@@ -57,6 +65,7 @@ function draw() {
     
   }
   
+
   
   
 }
@@ -163,20 +172,6 @@ class Pipe {
   }
 }
 
-
-class Apple {
-  constructor() {
-    this.size = 10;
-    this.x = random(30, width-30);
-    this.y = random(30, height-30);
-  }
-
-  showSelf() {
-    stroke(0, 80, 80);
-    fill(0, 80, 80);
-    rect(this.x, this.y, this.size, this.size);
-  }
-}
 
 
 
