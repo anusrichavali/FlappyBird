@@ -1,7 +1,6 @@
 let brushHue, bird, score;
 var pipes = [];
 var lives;
-var food = [];
 
 function preload(){
   img = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2Fsky2.jpeg?v=1627504010156");
@@ -18,7 +17,8 @@ life3 = loadImage("https://cdn.glitch.com/2b8c969e-41ae-4b1e-994d-657490c55f16%2
   pipes.push(new Pipe());
   score = 0;
   lives = 3;
-  food.push(new Food());
+  foodTime = 75;
+  time = 0;
 }
 
 function draw() {
@@ -35,9 +35,7 @@ function draw() {
   
   if (frameCount % 70 == 0){
     pipes.push(new Pipe());
-  } else if (frameCount % 250 == 0){
-    food.push(new Food());
-  }
+  } 
   
   for (let i = pipes.length - 1; i >= 0; i--){
     pipes[i].display();
@@ -56,13 +54,7 @@ function draw() {
        }
     
   }
-  for (let i = food.length - 1; i>=0; i--){
-    food[i].show(); 
-    
-    if (food[i].offscreen()){
-      food.splice(i, 1);         
-    }
-  }
+  
   
   
 }
@@ -169,38 +161,6 @@ class Pipe {
   }
 }
 
-//food adds points
-class Food {
-  constructor(){
-    this.x = random(width);
-    this.y = random(height);
-    this.w = 10;
-    this.color = 0;
-    this.sat = 80;
-    this.bri = 80;
-  }
-  
-  show(){
-    fill(this.color, this.sat, this.bri);
-    circle(this.x, this.y, this.w);
-  }
-  
-  offscreen() {
-    if (this.x < bird.x){
-      return true;
-    } else {
-      return false; 
-    }
-  }
-  
-  hit() {
-    if (collideCircleCircle(bird.x, bird.y, bird.w, this.x, this.y, this.w)){
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
 
 
 function displayScore() {
@@ -233,4 +193,14 @@ function restartGame() {
   bird.x = width/2;
   bird.y = height/2;
   loop();
+}
+
+function handleTime(){
+  if (time < 10000000000000){
+    time += 1;
+  }
+}
+
+function foodTime(){
+  if()
 }
