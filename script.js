@@ -35,7 +35,7 @@ function draw() {
     gameOver();            
   }
   
-  if (frameCount % 100 == 0){
+  if (frameCount % 70 == 0){
     pipes.push(new Pipe());
   }
   
@@ -111,8 +111,6 @@ function keyPressed(){
   }
 }
 
-
-
  
 class Pipe {
   constructor(){
@@ -163,6 +161,23 @@ class Pipe {
     return false;
   }
 }
+
+//food adds points
+class Food {
+  constructor(){
+    this.x = random(width);
+    this.y = random(height);
+    this.w = 10;
+    this.color = 0;
+    this.sat = 80;
+    this.bri = 80;
+  }
+  show(){
+    fill(this.color, this.sat, this.bri);
+    circle(this.x, this.y, this.w);
+  }
+}
+
 
 function displayScore() {
   fill(0);
